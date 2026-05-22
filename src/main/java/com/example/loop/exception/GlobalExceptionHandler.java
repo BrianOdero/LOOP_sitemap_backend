@@ -21,7 +21,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class GlobalExceptionHandler {
 
     // 404 Not Found
-    @ExceptionHandler(ResourceNotFoundException.class) // 
+    @ExceptionHandler(ResourceNotFoundException.class) 
     public ResponseEntity<ErrorResponse> handleNotFound(ResourceNotFoundException ex, HttpServletRequest request){
 
             // Build and return a custom error response with the appropriate HTTP status code and error message.
