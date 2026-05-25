@@ -1,0 +1,30 @@
+PHASE 1 PROJECT IMPLEMENTATION - guideline for the recommended approach of implementing this - 25th MAY 2026
+
+Layer 1 — Foundation (what everything else is built on)
+1. pom.xml                     → defines what libraries are available
+2. application.properties      → defines config values everything reads
+3. LoopApplication.java        → the entry point that starts it all
+
+Layer 2 — Data model (what does a user look like?)
+4. Role.java                   → simplest thing — just an enum
+5. User.java                   → the entity; needs Role
+6. UserRepository.java         → how we query users; needs User
+
+Layer 3 — Shared concerns (cross-cutting things every feature will use)
+7.  ErrorResponse.java             → the JSON shape for all errors
+8.  ResourceNotFoundException.java → a custom exception to throw
+9.  GlobalExceptionHandler.java    → catches exceptions, returns ErrorResponse
+
+Layer 4 — Security machinery (the JWT infrastructure)
+10. JwtUtil.java                   → pure utility: generate & validate tokens
+11. CustomUserDetailsService.java  → bridges User entity → Spring Security; needs UserRepository
+12. JwtAuthFilter.java             → reads cookie, calls JwtUtil + UserDetailsService
+13. SecurityConfig.java            → wires the whole filter chain together; needs all 3 above
+
+Layer 5 — Auth feature (the actual endpoints, written last)
+14. LoginRequest.java              → inbound DTO (what the client sends)
+15. AuthResponse.java              → outbound DTO (what we return)
+16. AuthService.java               → business logic; needs JwtUtil, UserRepository, AuthResponse
+17. AuthController.java            → HTTP layer; thin, just delegates to AuthService
+
+The mental model is essentially: config → data → shared tools → security wiring → feature endpoints. 
