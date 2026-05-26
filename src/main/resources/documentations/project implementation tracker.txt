@@ -28,3 +28,39 @@ Layer 5 — Auth feature (the actual endpoints, written last)
 17. AuthController.java            → HTTP layer; thin, just delegates to AuthService
 
 The mental model is essentially: config → data → shared tools → security wiring → feature endpoints. 
+
+
+----------------------APPLICATION.PROPERTIES CONFIGURATION------------------------------------------
+
+The following is the resources/application.properties file config using the H2 database, ready for docker IMPLEMENTATION
+
+spring.application.name=loop
+
+# ── Server ───────────────────────────────────────────────────
+server.port=8080
+
+# # ── PostgreSQL — Local install ────────────────────────────────
+# # Switch the URL to jdbc:postgresql://postgres:5432/loop_db
+# # when running inside Docker Compose (container-to-container).
+# spring.datasource.url=jdbc:postgresql://localhost:5432/loop_db
+# spring.datasource.username=admin
+# spring.datasource.password=secret
+# spring.datasource.driver-class-name=org.postgresql.Driver
+
+# ── JPA / Hibernate ──────────────────────────────────────────
+# update  → adds new columns/tables; never drops (safe for dev)
+# validate → use this when moving to staging/production
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.format_sql=true
+
+# ── JWT ──────────────────────────────────────────────────────
+# Minimum 32 characters for HS256. Use an env var in production:
+# app.jwt.secret=${JWT_SECRET}
+jwt.secret=c32a85d6cc2108d44c793f5b07154dabc27e744f2c7e8158fa114c05f2566fdd
+jwt.expiration-ms=86400000
+
+# ── Cookie ───────────────────────────────────────────────────
+app.cookie.name=loop_token
+app.cookie.max-age-seconds=86400
