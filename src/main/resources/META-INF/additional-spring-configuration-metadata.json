@@ -20,5 +20,15 @@
     "type": "java.lang.Integer",
     "description": "A description for 'app.cookie.max-age-seconds'",
     "defaultValue": 86400
+  },
+  {
+    "name": "spring.h2.console.enabled",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.h2.console.enabled'"
+  },
+  {
+    "name": "spring.h2.console.path",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.h2.console.path'"
   }
 ]}
