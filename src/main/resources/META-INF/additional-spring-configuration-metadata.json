@@ -30,5 +30,20 @@
     "name": "spring.h2.console.path",
     "type": "java.lang.String",
     "description": "A description for 'spring.h2.console.path'"
+  },
+  {
+    "name": "spring.web.error.include-stacktrace",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.web.error.include-stacktrace'"
+  },
+  {
+    "name": "spring.web.error.include-message",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.web.error.include-message'"
+  },
+  {
+    "name": "spring.web.error.include-binding-errors",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.web.error.include-binding-errors'"
   }
 ]}
